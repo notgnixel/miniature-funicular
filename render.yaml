@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: shared-calendar
+    runtime: node
+    plan: free
+    buildCommand: cd client && npm install && npm run build && cd ../server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: DATABASE_URL   # paste your Neon (or other Postgres) connection string in the Render dashboard
+        sync: false
